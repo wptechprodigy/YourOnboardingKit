@@ -21,6 +21,12 @@ class OnboardingViewController: UIViewController {
 
     private lazy var callsToActionContainerView: CallsToActionContainerView = {
         let view = CallsToActionContainerView(tintColor: tintColor)
+        view.nextButtonTapped = {
+            print(">> Next button tapped...")
+        }
+        view.getStartedButtonTapped = {
+            print(">> Get Started button tapped...")
+        }
         return view
     }()
 
