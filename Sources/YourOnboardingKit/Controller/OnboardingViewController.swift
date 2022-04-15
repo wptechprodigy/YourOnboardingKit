@@ -16,13 +16,11 @@ class OnboardingViewController: UIViewController {
 
     private lazy var transitionView: TransitionView = {
         let view = TransitionView()
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
     private lazy var callsToActionContainerView: CallsToActionContainerView = {
         let view = CallsToActionContainerView(tintColor: tintColor)
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
@@ -32,7 +30,6 @@ class OnboardingViewController: UIViewController {
                 transitionView,
                 callsToActionContainerView
             ])
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.axis = .vertical
         return view
     }()
@@ -54,6 +51,7 @@ class OnboardingViewController: UIViewController {
         setupViews()
     }
 
+    // MARK: - Configure View Elements
     private func setupViews() {
         self.view.addSubview(stackView)
 
