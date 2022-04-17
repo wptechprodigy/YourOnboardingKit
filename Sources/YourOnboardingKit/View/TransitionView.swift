@@ -12,6 +12,7 @@ class TransitionView: UIView {
     // MARK: - Number of slides
     private let slides: [Slide]
     private let viewTintColor: UIColor
+    private var slideIndex: Int = -1
 
     // MARK: - Timer
     private var timer: DispatchSourceTimer?
@@ -20,7 +21,6 @@ class TransitionView: UIView {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.backgroundColor = .systemTeal
         return imageView
     }()
 
@@ -104,7 +104,31 @@ class TransitionView: UIView {
         timer = DispatchSource.makeTimerSource()
         timer?.schedule(deadline: .now(), repeating: .seconds(3), leeway: .seconds(1))
         timer?.setEventHandler(handler: {
-            print(">> Show next...")
+            self.showNext()
         })
+    }
+
+    private func showNext() {
+
+        let nextImage: UIImage
+
+        if slides.indices.contains(slideIndex + 1) {
+            nextImage = slides[slideIndex + 1].image
+            slideIndex += 1
+        } else {
+            nextImage = slides[0].image
+            slideIndex = 0
+        }
+
+        DispatchQueue.main.async {
+            UIView.transition(
+                with: self.imageView,
+                duration: 0.5,
+                options: .transitionCrossDissolve,
+                animations: {
+                    self.imageView.image = nextImage
+                },
+                completion: nil)
+        }
     }
 }
