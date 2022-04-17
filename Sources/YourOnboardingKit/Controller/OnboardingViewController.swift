@@ -57,6 +57,11 @@ class OnboardingViewController: UIViewController {
         setupViews()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        transitionView.start()
+    }
+
     // MARK: - Configure View Elements
     private func setupViews() {
         self.view.addSubview(stackView)

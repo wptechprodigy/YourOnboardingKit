@@ -13,6 +13,9 @@ class TransitionView: UIView {
     private let slides: [Slide]
     private let viewTintColor: UIColor
 
+    // MARK: - Timer
+    private var timer: DispatchSourceTimer?
+
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -83,5 +86,25 @@ class TransitionView: UIView {
         imageView.snp.makeConstraints { make in
             make.height.equalTo(stackView.snp.height).multipliedBy(0.8)
         }
+    }
+
+    // MARK: - Object methods
+    func start() {
+        buildTimerIfNeeded()
+        timer?.resume()
+    }
+
+    func stop() {
+        timer?.cancel()
+        timer = nil
+    }
+
+    private func buildTimerIfNeeded() {
+        guard timer == nil else { return }
+        timer = DispatchSource.makeTimerSource()
+        timer?.schedule(deadline: .now(), repeating: .seconds(3), leeway: .seconds(1))
+        timer?.setEventHandler(handler: {
+            print(">> Show next...")
+        })
     }
 }
