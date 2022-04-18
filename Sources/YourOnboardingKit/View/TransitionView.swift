@@ -111,12 +111,15 @@ class TransitionView: UIView {
     private func showNext() {
 
         let nextImage: UIImage
+        let nextCaption: String
 
         if slides.indices.contains(slideIndex + 1) {
             nextImage = slides[slideIndex + 1].image
+            nextCaption = slides[slideIndex + 1].caption
             slideIndex += 1
         } else {
             nextImage = slides[0].image
+            nextCaption = slides[0].caption
             slideIndex = 0
         }
 
@@ -129,6 +132,8 @@ class TransitionView: UIView {
                     self.imageView.image = nextImage
                 },
                 completion: nil)
+
+            self.captionView.setTitle(as: nextCaption)
         }
     }
 }
