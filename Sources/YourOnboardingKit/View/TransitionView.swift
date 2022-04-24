@@ -122,6 +122,10 @@ class TransitionView: UIView {
             nextBarView = barViews[slideIndex + 1]
             slideIndex += 1
         } else {
+            DispatchQueue.main.async {
+                self.barViews.forEach { $0.reset() }
+            }
+
             nextImage = slides[0].image
             nextCaption = slides[0].caption
             nextBarView = barViews[0]
