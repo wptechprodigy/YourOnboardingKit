@@ -114,14 +114,17 @@ class TransitionView: UIView {
 
         let nextImage: UIImage
         let nextCaption: String
+        let nextBarView: AnimatedBarView
 
         if slides.indices.contains(slideIndex + 1) {
             nextImage = slides[slideIndex + 1].image
             nextCaption = slides[slideIndex + 1].caption
+            nextBarView = barViews[slideIndex + 1]
             slideIndex += 1
         } else {
             nextImage = slides[0].image
             nextCaption = slides[0].caption
+            nextBarView = barViews[0]
             slideIndex = 0
         }
 
@@ -136,6 +139,7 @@ class TransitionView: UIView {
                 completion: nil)
 
             self.captionView.setTitle(as: nextCaption)
+            nextBarView.startAnimating()
         }
     }
 }
