@@ -146,4 +146,21 @@ class TransitionView: UIView {
             nextBarView.startAnimating()
         }
     }
+
+    func handleTap(direction: Direction) {
+        switch direction {
+            case .left:
+                barViews[slideIndex].reset()
+                if barViews.indices.contains(slideIndex - 1) {
+                    barViews[slideIndex - 1].reset()
+                }
+                slideIndex -= 2
+            case .right:
+                barViews[slideIndex].complete()
+        }
+
+        timer?.cancel()
+        timer = nil
+        start()
+    }
 }
